@@ -5,22 +5,23 @@ namespace Common.Files
     /// <summary>
     /// Class UI.
     /// </summary>
-    public static class UI
+    public class UI
     {
         /// <summary>
         /// Shows the main menu of the game.
         /// </summary>
-        public static void MainMenu()
+        public string MainMenu(bool ig)
         {
-            Console.WriteLine("Made by Diogo Maia and Ines Goncalves!");
-            Console.WriteLine();
-            Console.WriteLine("Rules of the Game:");
-            Console.WriteLine();
-            Console.WriteLine("Movement:");
-            Console.WriteLine("     The players decide which colors to play" +
+            string menu = "";
+            menu += "Made by Diogo Maia and Ines Goncalves!";
+            menu += "\n";
+            menu += "Rules of the Game:";
+            menu += "\n";
+            menu += "Movement:";
+            menu += "     The players decide which colors to play" +
                 " with and who " +
-                              "plays first.");
-            Console.WriteLine("     Then the first player chooses which" +
+                              "plays first.";
+            menu += "     Then the first player chooses which" +
                 " piece he wants to play first. " +
                 "\n     The pieces can be moved in the following ways: " +
                 "\n          The player can move in all possible directions" +
@@ -30,25 +31,23 @@ namespace Common.Files
                 " eliminating " +
                              "that piece and landing at a free spot on the" +
                              " board." +
-                "\n          Only one piece can move per turn.");
-            Console.WriteLine("   Afterwards, it's the second player's turn," +
-                " following the same rules.");
-            Console.WriteLine();
-            Console.WriteLine("Objectives:");
-            Console.WriteLine("     The game ends when a player has captured" +
+                "\n          Only one piece can move per turn.";
+            menu += "   Afterwards, it's the second player's turn," +
+                " following the same rules.";
+            menu += "\n";
+            menu += "Objectives:";
+            menu += "     The game ends when a player has captured" +
                 " or immobilized all of the " +
-                              "opponent's pieces.");
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("Press any key to continue!");
-            Console.ReadKey();
-            Console.Clear();
+                              "opponent's pieces.";
+            menu += "\n";
+            menu += "\n";
+            menu += "Press any key to continue!";
         }
 
         /// <summary>
         /// Menu where the player chooses their color.
         /// </summary>
-        public static void ChooseMenu() =>
+        public void ChooseMenu() =>
             Console.WriteLine("First Player is White (W) or Black (B)?");
 
         /// <summary>
@@ -56,7 +55,7 @@ namespace Common.Files
         /// </summary>
         /// <param name="square">A position on the board.</param>
         /// <returns>Char to write.</returns>
-        private static char GetChar(Square square)
+        private char GetChar(Square square)
         {
             char c = ' ';
             if (square.Piece is null)
@@ -104,7 +103,7 @@ namespace Common.Files
         /// Renders the game board.
         /// </summary>
         /// <param name="gameGrid">Game board.</param>
-        public static void Render(Square[,] gameGrid)
+        public void Render(Square[,] gameGrid)
         {
             for (int x = 0; x < gameGrid.GetLength(0); x++)
             {
@@ -124,7 +123,7 @@ namespace Common.Files
         /// <summary>
         /// Draws the respective directions and numbers to use them.
         /// </summary>
-        private static void DrawMov()
+        private void DrawMov()
         {
             WriteIn("Select the desired direction with your numpad!", 2, 50);
             WriteIn("  5(NO)   0(N)   4(NE)", 4, 60);
@@ -141,7 +140,7 @@ namespace Common.Files
         /// <summary>
         /// Draws the lines of the board.
         /// </summary>
-        private static void DrawBoard()
+        private void DrawBoard()
         {
             WriteIn(" ------------- ", 0, 1);
             WriteIn(" ------------- ", 0, 17);
@@ -172,7 +171,7 @@ namespace Common.Files
         /// Writes the winner of he game.
         /// </summary>
         /// <param name="winner">winner of the game.</param>
-        public static void Win(Player winner)
+        public void Win(Player winner)
         {
             Console.Clear();
             Console.Write($"Player {winner.Id} wins!!!!");
@@ -183,7 +182,7 @@ namespace Common.Files
         /// </summary>
         /// <param name="possibleMoves">Possible moves.</param>
         /// <param name="p">Piece to check the possible directions.</param>
-        public static void ShowPossibleDirections(
+        public void ShowPossibleDirections(
             Directions[] possibleMoves, Piece p)
         {
             Console.WriteLine();
@@ -205,7 +204,7 @@ namespace Common.Files
         /// <param name="s">What to write.</param>
         /// <param name="x">X pos of the console.</param>
         /// <param name="y">Y pos of the console.</param>
-        public static void WriteIn(string s, int x, int y)
+        public void WriteIn(string s, int x, int y)
         {
             int oRow = Console.CursorTop;
             int oCol = Console.CursorLeft;

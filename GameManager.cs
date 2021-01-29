@@ -13,6 +13,8 @@ namespace Common.Files
         /// </summary>
         private readonly Square[,] gameGrid;
 
+        private UI ui;
+
         /// <summary>
         /// Represents player 1.
         /// </summary>
@@ -36,8 +38,10 @@ namespace Common.Files
         /// <summary>
         /// Constructor of the class.
         /// </summary>
-        public GameManager()
+        public GameManager(UI ui)
         {
+            this.ui = ui;
+
             // Instanciates the grid
             gameGrid = new Square[5, 5];
 
@@ -78,10 +82,10 @@ namespace Common.Files
                     Console.Clear();
 
                     // Renders the game board
-                    UI.Render(gameGrid);
+                    ui.Render(gameGrid);
 
                     // Shows who winned the match
-                    UI.Win(turn);
+                    ui.Win(turn);
 
                     // Breaks the game loop
                     break;
@@ -116,10 +120,10 @@ namespace Common.Files
                     Console.Clear();
 
                     // Render the grid
-                    UI.Render(gameGrid);
+                    ui.Render(gameGrid);
 
                     // Show the possible directions
-                    UI.ShowPossibleDirections(
+                    ui.ShowPossibleDirections(
                         gameGrid[cPiece.Row, cPiece.Col].PossibleMovements,
                         cPiece);
 
@@ -248,7 +252,7 @@ namespace Common.Files
                     c != "4" && c != "5              " && c != "6")
                 {
                     Console.Clear();
-                    UI.Render(gameGrid);
+                    ui.Render(gameGrid);
                     Console.WriteLine($"{turn.Id} - {turn.Color} is playing.");
                     Console.WriteLine("Choose the piece you want" +
                         " to play from 1-6.");
@@ -440,7 +444,7 @@ namespace Common.Files
                     choice, "B", StringComparison.OrdinalIgnoreCase))
             {
                 Console.Clear();
-                UI.ChooseMenu();
+                ui.ChooseMenu();
                 choice = Console.ReadLine().ToUpper();
             }
 
