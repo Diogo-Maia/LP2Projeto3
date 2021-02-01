@@ -13,7 +13,7 @@ namespace Common.Files
         /// </summary>
         private readonly Square[,] gameGrid;
 
-        private UI ui;
+        private IInputController input;
 
         /// <summary>
         /// Represents player 1.
@@ -38,9 +38,8 @@ namespace Common.Files
         /// <summary>
         /// Constructor of the class.
         /// </summary>
-        public GameManager(UI ui)
+        public GameManager()
         {
-            this.ui = ui;
 
             // Instanciates the grid
             gameGrid = new Square[5, 5];
@@ -81,12 +80,6 @@ namespace Common.Files
                     // Clears the console
                     Console.Clear();
 
-                    // Renders the game board
-                    ui.Render(gameGrid);
-
-                    // Shows who winned the match
-                    ui.Win(turn);
-
                     // Breaks the game loop
                     break;
                 }
@@ -119,16 +112,8 @@ namespace Common.Files
                     // Clear the window
                     Console.Clear();
 
-                    // Render the grid
-                    ui.Render(gameGrid);
-
-                    // Show the possible directions
-                    ui.ShowPossibleDirections(
-                        gameGrid[cPiece.Row, cPiece.Col].PossibleMovements,
-                        cPiece);
-
                     // Gets the player choice
-                    c = Console.ReadLine();
+                    c = input.GetsDirection();
 
                     // Checks if piece can be moved in that direction
                     mov = CheckMovement(c);
@@ -252,12 +237,11 @@ namespace Common.Files
                     c != "4" && c != "5              " && c != "6")
                 {
                     Console.Clear();
-                    ui.Render(gameGrid);
                     Console.WriteLine($"{turn.Id} - {turn.Color} is playing.");
                     Console.WriteLine("Choose the piece you want" +
                         " to play from 1-6.");
                     Console.WriteLine();
-                    c = Console.ReadLine();
+                    c = input.GetsPiece();
                 }
 
                 cPiece = ChoosenPiece(c);
@@ -444,8 +428,7 @@ namespace Common.Files
                     choice, "B", StringComparison.OrdinalIgnoreCase))
             {
                 Console.Clear();
-                ui.ChooseMenu();
-                choice = Console.ReadLine().ToUpper();
+                choice = input.GetsPlayer().ToUpper();
             }
 
             SetPlayers(choice);
