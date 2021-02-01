@@ -8,18 +8,17 @@ namespace ConsoleApp
         /// <summary>
         /// Shows the main menu of the game.
         /// </summary>
-        public string MainMenu(bool ig)
+        public void MainMenu()
         {
-            string menu = "";
-            menu += "Made by Diogo Maia and Ines Goncalves!";
-            menu += "\n";
-            menu += "Rules of the Game:";
-            menu += "\n";
-            menu += "Movement:";
-            menu += "     The players decide which colors to play" +
+            Console.WriteLine("Made by Diogo Maia and Ines Goncalves!");
+            Console.WriteLine();
+            Console.WriteLine("Rules of the Game:");
+            Console.WriteLine();
+            Console.WriteLine("Movement:");
+            Console.WriteLine("     The players decide which colors to play" +
                 " with and who " +
-                              "plays first.";
-            menu += "     Then the first player chooses which" +
+                              "plays first.");
+            Console.WriteLine("     Then the first player chooses which" +
                 " piece he wants to play first. " +
                 "\n     The pieces can be moved in the following ways: " +
                 "\n          The player can move in all possible directions" +
@@ -29,17 +28,19 @@ namespace ConsoleApp
                 " eliminating " +
                              "that piece and landing at a free spot on the" +
                              " board." +
-                "\n          Only one piece can move per turn.";
-            menu += "   Afterwards, it's the second player's turn," +
-                " following the same rules.";
-            menu += "\n";
-            menu += "Objectives:";
-            menu += "     The game ends when a player has captured" +
+                "\n          Only one piece can move per turn.");
+            Console.WriteLine("   Afterwards, it's the second player's turn," +
+                " following the same rules.");
+            Console.WriteLine();
+            Console.WriteLine("Objectives:");
+            Console.WriteLine("     The game ends when a player has captured" +
                 " or immobilized all of the " +
-                              "opponent's pieces.";
-            menu += "\n";
-            menu += "\n";
-            menu += "Press any key to continue!";
+                              "opponent's pieces.");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("Press any key to continue!");
+            Console.ReadKey();
+            Console.Clear();
         }
 
         /// <summary>

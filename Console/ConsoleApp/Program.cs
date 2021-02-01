@@ -1,4 +1,5 @@
 ﻿using System;
+using Common.Files;
 
 namespace ConsoleApp
 {
@@ -6,7 +7,11 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            GameManager gm = new GameManager();
+            ConsoleView cv = new ConsoleView();
+
+            cv.MainMenu();
+            gm.GameLoop();
         }
     }
 }
