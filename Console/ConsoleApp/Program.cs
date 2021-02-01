@@ -7,7 +7,7 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            IInputController input = null;
+            IInputController input = new ConsoleControler();
             IView iv = new ConsoleView();
             GameManager gm = new GameManager(input , iv);
             

@@ -86,7 +86,7 @@ namespace Common.Files
                     // Clears the console
                     Console.Clear();
 
-                    view.Win();
+                    view.Win(turn);
 
                     // Breaks the game loop
                     break;
@@ -114,9 +114,11 @@ namespace Common.Files
                 while (c != "0" && c != "1" && c != "2" && c != "3" && c != "4"
                     && c != "5" && c != "6" && c != "7")
                 {
-                    view.Render();
+                    view.Render(gameGrid);
 
-                    view.ShowPossibleDirections();
+                    view.ShowPossibleDirections(
+                        gameGrid[cPiece.Row, cPiece.Col].PossibleMovements,
+                        cPiece);
 
                     // Gets the player choice
                     c = input.GetsDirection();
@@ -242,7 +244,7 @@ namespace Common.Files
                     c != "4" && c != "5" && c != "6")
                 {
                     Console.Clear();
-                    view.Render();
+                    view.Render(gameGrid);
                     Console.WriteLine($"{turn.Id} - {turn.Color} is playing.");
                     Console.WriteLine("Choose the piece you want" +
                         " to play from 1-6.");

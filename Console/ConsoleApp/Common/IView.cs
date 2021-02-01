@@ -12,17 +12,17 @@
 
         }
 
-        public void Render()
+        public void Render(Square[,] gameGrid)
         {
 
         }
 
-        public void Win()
+        public void Win(Player winner)
         {
 
         }
 
-        public void ShowPossibleDirections()
+        public void ShowPossibleDirections(Directions[] possibleMoves, Piece p)
         {
 
         }
