@@ -38,8 +38,9 @@ namespace Common.Files
         /// <summary>
         /// Constructor of the class.
         /// </summary>
-        public GameManager()
+        public GameManager(IInputController input)
         {
+            this.input = input;
 
             // Instanciates the grid
             gameGrid = new Square[5, 5];
@@ -86,9 +87,6 @@ namespace Common.Files
 
                 // Changes the player who is playing
                 ChangeTurn();
-
-                // Thread sleep
-                Thread.Sleep(200);
             }
         }
 
@@ -126,7 +124,6 @@ namespace Common.Files
                         c = string.Empty;
 
                         Console.WriteLine("Unavailable movement to choose");
-                        Console.ReadKey();
                     }
                 }
             }
@@ -251,7 +248,6 @@ namespace Common.Files
                 if (cPiece is null)
                 {
                     Console.WriteLine("Unavailable Piece to choose");
-                    Console.ReadKey();
                 }
             }
         }
