@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 
 namespace Common.Files
 {
@@ -11,9 +10,11 @@ namespace Common.Files
         /// <summary>
         /// Represents the game board.
         /// </summary>
-        private readonly Square[,] gameGrid;
+        public readonly Square[,] gameGrid;
 
         private IInputController input;
+
+        private IView view;
 
         /// <summary>
         /// Represents player 1.
@@ -38,9 +39,13 @@ namespace Common.Files
         /// <summary>
         /// Constructor of the class.
         /// </summary>
-        public GameManager(IInputController input)
+        /// <param name="input"></param>
+        /// <param name="view"></param>
+        public GameManager(IInputController input, IView view)
         {
             this.input = input;
+
+            this.view = view;
 
             // Instanciates the grid
             gameGrid = new Square[5, 5];
@@ -81,6 +86,8 @@ namespace Common.Files
                     // Clears the console
                     Console.Clear();
 
+                    view.Win();
+
                     // Breaks the game loop
                     break;
                 }
@@ -107,8 +114,9 @@ namespace Common.Files
                 while (c != "0" && c != "1" && c != "2" && c != "3" && c != "4"
                     && c != "5" && c != "6" && c != "7")
                 {
-                    // Clear the window
-                    Console.Clear();
+                    view.Render();
+
+                    view.ShowPossibleDirections();
 
                     // Gets the player choice
                     c = input.GetsDirection();
@@ -231,9 +239,10 @@ namespace Common.Files
             while (cPiece is null)
             {
                 while (c != "1" && c != "2" && c != "3" &&
-                    c != "4" && c != "5              " && c != "6")
+                    c != "4" && c != "5" && c != "6")
                 {
                     Console.Clear();
+                    view.Render();
                     Console.WriteLine($"{turn.Id} - {turn.Color} is playing.");
                     Console.WriteLine("Choose the piece you want" +
                         " to play from 1-6.");
@@ -423,7 +432,7 @@ namespace Common.Files
                 && !string.Equals(
                     choice, "B", StringComparison.OrdinalIgnoreCase))
             {
-                Console.Clear();
+                view.ChooseMenu();
                 choice = input.GetsPlayer().ToUpper();
             }
 

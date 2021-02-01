@@ -1,6 +1,6 @@
 ﻿namespace Common.Files
 {
-    interface IView
+    public interface IView
     {
         public void MainMenu()
         {
@@ -8,6 +8,11 @@
         }
 
         public void ChooseMenu()
+        {
+
+        }
+
+        public void Render()
         {
 
         }
