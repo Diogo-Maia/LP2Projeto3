@@ -2,7 +2,7 @@
 {
     interface IView
     {
-        public static void MainMenu()
+        public void MainMenu()
         {
             
         }
