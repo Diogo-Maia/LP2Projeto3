@@ -1,13 +1,18 @@
 ﻿namespace Common.Files
 {
-    interface IView
+    public interface IView
     {
-        public static void MainMenu()
+        public void MainMenu()
         {
             
         }
 
         public void ChooseMenu()
+        {
+
+        }
+
+        public void Render()
         {
 
         }

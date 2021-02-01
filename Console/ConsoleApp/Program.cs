@@ -8,10 +8,10 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             IInputController input = null;
-            GameManager gm = new GameManager(input);
-            IView cv = new ConsoleView();
-
-            cv.MainMenu();
+            IView iv = new ConsoleView();
+            GameManager gm = new GameManager(input , iv);
+            
+            iv.MainMenu();
             gm.GameLoop();
         }
     }
