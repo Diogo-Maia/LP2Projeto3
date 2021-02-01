@@ -3,7 +3,7 @@ using Common.Files;
 
 namespace ConsoleApp
 {
-    public class ConsoleView
+    public class ConsoleView : IView
     {
         /// <summary>
         /// Shows the main menu of the game.

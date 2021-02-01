@@ -7,8 +7,9 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            GameManager gm = new GameManager();
-            ConsoleView cv = new ConsoleView();
+            IInputController input = null;
+            GameManager gm = new GameManager(input);
+            IView cv = new ConsoleView();
 
             cv.MainMenu();
             gm.GameLoop();
