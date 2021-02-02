@@ -2,29 +2,14 @@
 {
     public interface IView
     {
-        public void MainMenu()
-        {
-            
-        }
+        void MainMenu();
 
-        public void ChooseMenu()
-        {
+        void ChooseMenu();
 
-        }
+        void Render(Square[,] gameGrid);
 
-        public void Render(Square[,] gameGrid)
-        {
+        void Win(Player winner);
 
-        }
-
-        public void Win(Player winner)
-        {
-
-        }
-
-        public void ShowPossibleDirections(Directions[] possibleMoves, Piece p)
-        {
-
-        }
+        void ShowPossibleDirections(Directions[] possibleMoves, Piece p);
     }
 }

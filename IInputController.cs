@@ -4,19 +4,10 @@ namespace Common.Files
 {
     public interface IInputController
     {
-        public string GetsPiece()
-        {
-            return String.Empty;
-        }
+        string GetsPiece();
 
-        public string GetsDirection()
-        {
-            return String.Empty;
-        }
+        string GetsDirection();
 
-        public string GetsPlayer()
-        {
-            return String.Empty;
-        }
+        string GetsPlayer();
     }
 }
