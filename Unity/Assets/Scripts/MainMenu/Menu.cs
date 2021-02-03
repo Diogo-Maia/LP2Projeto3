@@ -7,7 +7,6 @@ namespace MainMenu
     {
         public void Play()
         {
-            Debug.Log("a");
             SceneManager.LoadScene(1);
         }
 

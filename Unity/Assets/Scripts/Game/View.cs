@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using Common.Files;
-using UnityEngine.UI;
 
 namespace Game
 {
@@ -10,11 +9,15 @@ namespace Game
         public string gameboard;
         public string directions;
 
+        public bool win;
+        public Player winner;
+
         private void Start()
         {
             text = "";
             gameboard = "";
             directions = "";
+            win = false;
         }
 
         public void ChooseMenu()
@@ -24,7 +27,7 @@ namespace Game
 
         public void MainMenu()
         {
-
+            //Shown in different scene
         }
 
         public void Render(Square[,] gameGrid)
@@ -120,7 +123,8 @@ namespace Game
 
         public void Win(Player winner)
         {
-
+            win = true;
+            this.winner = winner;
         }
     }
 }

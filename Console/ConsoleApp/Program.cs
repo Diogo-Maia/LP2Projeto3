@@ -1,5 +1,4 @@
-﻿using System;
-using Common.Files;
+﻿using Common.Files;
 
 namespace ConsoleApp
 {
