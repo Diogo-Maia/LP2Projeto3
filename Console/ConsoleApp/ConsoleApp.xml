@@ -329,6 +329,34 @@
             <param name="dir">direction to check.</param>
             <returns>True if direction is available.</returns>
         </member>
+        <member name="T:ConsoleApp.ConsoleControler">
+            <summary>
+            Class to control Input.
+            </summary>
+        </member>
+        <member name="M:ConsoleApp.ConsoleControler.GetsPiece">
+            <summary>
+            Chooses the piece.
+            </summary>
+            <returns>The input.</returns>
+        </member>
+        <member name="M:ConsoleApp.ConsoleControler.GetsDirection">
+            <summary>
+            Chooses the direction.
+            </summary>
+            <returns>The input.</returns>
+        </member>
+        <member name="M:ConsoleApp.ConsoleControler.GetsPlayer">
+            <summary>
+            Chooses the player.
+            </summary>
+            <returns>The input.</returns>
+        </member>
+        <member name="T:ConsoleApp.ConsoleView">
+            <summary>
+            Shows UI on Console.
+            </summary>
+        </member>
         <member name="M:ConsoleApp.ConsoleView.MainMenu">
             <summary>
             Shows the main menu of the game.
@@ -339,28 +367,11 @@
             Menu where the player chooses their color.
             </summary>
         </member>
-        <member name="M:ConsoleApp.ConsoleView.GetChar(Common.Files.Square)">
-            <summary>
-            Draws the playable pieces.
-            </summary>
-            <param name="square">A position on the board.</param>
-            <returns>Char to write.</returns>
-        </member>
         <member name="M:ConsoleApp.ConsoleView.Render(Common.Files.Square[0:,0:])">
             <summary>
             Renders the game board.
             </summary>
             <param name="gameGrid">Game board.</param>
-        </member>
-        <member name="M:ConsoleApp.ConsoleView.DrawMov">
-            <summary>
-            Draws the respective directions and numbers to use them.
-            </summary>
-        </member>
-        <member name="M:ConsoleApp.ConsoleView.DrawBoard">
-            <summary>
-            Draws the lines of the board.
-            </summary>
         </member>
         <member name="M:ConsoleApp.ConsoleView.Win(Common.Files.Player)">
             <summary>
@@ -382,6 +393,33 @@
             <param name="s">What to write.</param>
             <param name="x">X pos of the console.</param>
             <param name="y">Y pos of the console.</param>
+        </member>
+        <member name="M:ConsoleApp.ConsoleView.GetChar(Common.Files.Square)">
+            <summary>
+            Draws the playable pieces.
+            </summary>
+            <param name="square">A position on the board.</param>
+            <returns>Char to write.</returns>
+        </member>
+        <member name="M:ConsoleApp.ConsoleView.DrawMov">
+            <summary>
+            Draws the respective directions and numbers to use them.
+            </summary>
+        </member>
+        <member name="M:ConsoleApp.ConsoleView.DrawBoard">
+            <summary>
+            Draws the lines of the board.
+            </summary>
+        </member>
+        <member name="T:ConsoleApp.Program">
+            <summary>
+            Program class.
+            </summary>
+        </member>
+        <member name="M:ConsoleApp.Program.Main">
+            <summary>
+            Main Method.
+            </summary>
         </member>
     </members>
 </doc>

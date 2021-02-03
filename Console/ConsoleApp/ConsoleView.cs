@@ -1,8 +1,15 @@
-﻿using System;
-using Common.Files;
+﻿// <copyright file="ConsoleView.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace ConsoleApp
 {
+    using System;
+    using Common.Files;
+
+    /// <summary>
+    /// Shows UI on Console.
+    /// </summary>
     public class ConsoleView : IView
     {
         /// <summary>
@@ -45,6 +52,74 @@ namespace ConsoleApp
         /// </summary>
         public void ChooseMenu() =>
             Console.WriteLine("First Player is White (W) or Black (B)?");
+
+        /// <summary>
+        /// Renders the game board.
+        /// </summary>
+        /// <param name="gameGrid">Game board.</param>
+        public void Render(Square[,] gameGrid)
+        {
+            for (int x = 0; x < gameGrid.GetLength(0); x++)
+            {
+                // Iterate through the grid.
+                for (int y = 0; y < gameGrid.GetLength(1); y++)
+                {
+                    Console.Write(this.GetChar(gameGrid[x, y]) + "\t");
+                }
+
+                Console.WriteLine("\n\n");
+            }
+
+            this.DrawBoard();
+            this.DrawMov();
+        }
+
+        /// <summary>
+        /// Writes the winner of he game.
+        /// </summary>
+        /// <param name="winner">winner of the game.</param>
+        public void Win(Player winner)
+        {
+            Console.Clear();
+            Console.Write($"Player {winner.Id} wins!!!!");
+        }
+
+        /// <summary>
+        /// Show the direction of where a piece can be moved.
+        /// </summary>
+        /// <param name="possibleMoves">Possible moves.</param>
+        /// <param name="p">Piece to check the possible directions.</param>
+        public void ShowPossibleDirections(
+            Directions[] possibleMoves, Piece p)
+        {
+            Console.WriteLine();
+            Console.WriteLine("Possible movements:");
+            foreach (Directions direction in possibleMoves)
+            {
+                Console.Write(direction + ", ");
+            }
+
+            Console.WriteLine();
+            Console.WriteLine($"Selected Piece: {p.Id}");
+            Console.WriteLine();
+            Console.Write("Choose one of the options -> ");
+        }
+
+        /// <summary>
+        /// Writes in a certain part of the console.
+        /// </summary> 
+        /// <param name="s">What to write.</param>
+        /// <param name="x">X pos of the console.</param>
+        /// <param name="y">Y pos of the console.</param>
+        public void WriteIn(string s, int x, int y)
+        {
+            int oRow = Console.CursorTop;
+            int oCol = Console.CursorLeft;
+
+            Console.SetCursorPosition(y, x);
+            Console.Write(s);
+            Console.SetCursorPosition(oCol, oRow);
+        }
 
         /// <summary>
         /// Draws the playable pieces.
@@ -96,41 +171,20 @@ namespace ConsoleApp
         }
 
         /// <summary>
-        /// Renders the game board.
-        /// </summary>
-        /// <param name="gameGrid">Game board.</param>
-        public void Render(Square[,] gameGrid)
-        {
-            for (int x = 0; x < gameGrid.GetLength(0); x++)
-            {
-                // Iterate through the grid.
-                for (int y = 0; y < gameGrid.GetLength(1); y++)
-                {
-                    Console.Write(GetChar(gameGrid[x, y]) + "\t");
-                }
-
-                Console.WriteLine("\n\n");
-            }
-
-            DrawBoard();
-            DrawMov();
-        }
-
-        /// <summary>
         /// Draws the respective directions and numbers to use them.
         /// </summary>
         private void DrawMov()
         {
-            WriteIn("Select the desired direction with your numpad!", 2, 50);
-            WriteIn("  5(NO)   0(N)   4(NE)", 4, 60);
-            WriteIn(@"    \      |      /", 5, 60);
-            WriteIn(@"     \     |     /", 6, 60);
-            WriteIn(@"      \    |    /", 7, 60);
-            WriteIn("3(O)-------------- 2(E)", 8, 60);
-            WriteIn(@"      /    |    \", 9, 60);
-            WriteIn(@"     /     |     \", 10, 60);
-            WriteIn(@"    /      |      \", 11, 60);
-            WriteIn("  7(SO)   1(S)   6(SE)", 12, 60);
+            this.WriteIn("Select the desired direction with your numpad!", 2, 50);
+            this.WriteIn("  5(NO)   0(N)   4(NE)", 4, 60);
+            this.WriteIn(@"    \      |      /", 5, 60);
+            this.WriteIn(@"     \     |     /", 6, 60);
+            this.WriteIn(@"      \    |    /", 7, 60);
+            this.WriteIn("3(O)-------------- 2(E)", 8, 60);
+            this.WriteIn(@"      /    |    \", 9, 60);
+            this.WriteIn(@"     /     |     \", 10, 60);
+            this.WriteIn(@"    /      |      \", 11, 60);
+            this.WriteIn("  7(SO)   1(S)   6(SE)", 12, 60);
         }
 
         /// <summary>
@@ -138,76 +192,29 @@ namespace ConsoleApp
         /// </summary>
         private void DrawBoard()
         {
-            WriteIn(" ------------- ", 0, 1);
-            WriteIn(" ------------- ", 0, 17);
+            this.WriteIn(" ------------- ", 0, 1);
+            this.WriteIn(" ------------- ", 0, 17);
 
-            WriteIn("-            |             -", 1, 3);
-            WriteIn("-         |          -", 2, 6);
+            this.WriteIn("-            |             -", 1, 3);
+            this.WriteIn("-         |          -", 2, 6);
 
-            WriteIn("-----", 3, 10);
-            WriteIn("-----", 3, 18);
+            this.WriteIn("-----", 3, 10);
+            this.WriteIn("-----", 3, 18);
 
-            WriteIn("-     |     -", 4, 10);
-            WriteIn("-   |   -", 5, 12);
+            this.WriteIn("-     |     -", 4, 10);
+            this.WriteIn("-   |   -", 5, 12);
 
-            WriteIn("-   |   -", 7, 12);
-            WriteIn("-     |     -", 8, 10);
+            this.WriteIn("-   |   -", 7, 12);
+            this.WriteIn("-     |     -", 8, 10);
 
-            WriteIn("-----", 9, 18);
-            WriteIn("-----", 9, 10);
+            this.WriteIn("-----", 9, 18);
+            this.WriteIn("-----", 9, 10);
 
-            WriteIn("-         |          -", 10, 6);
-            WriteIn("-            |             -", 11, 3);
+            this.WriteIn("-         |          -", 10, 6);
+            this.WriteIn("-            |             -", 11, 3);
 
-            WriteIn(" ------------- ", 12, 17);
-            WriteIn(" ------------- ", 12, 1);
-        }
-
-        /// <summary>
-        /// Writes the winner of he game.
-        /// </summary>
-        /// <param name="winner">winner of the game.</param>
-        public void Win(Player winner)
-        {
-            Console.Clear();
-            Console.Write($"Player {winner.Id} wins!!!!");
-        }
-
-        /// <summary>
-        /// Show the direction of where a piece can be moved.
-        /// </summary>
-        /// <param name="possibleMoves">Possible moves.</param>
-        /// <param name="p">Piece to check the possible directions.</param>
-        public void ShowPossibleDirections(
-            Directions[] possibleMoves, Piece p)
-        {
-            Console.WriteLine();
-            Console.WriteLine("Possible movements:");
-            foreach (Directions direction in possibleMoves)
-            {
-                Console.Write(direction + ", ");
-            }
-
-            Console.WriteLine();
-            Console.WriteLine($"Selected Piece: {p.Id}");
-            Console.WriteLine();
-            Console.Write("Choose one of the options -> ");
-        }
-
-        /// <summary>
-        /// Writes in a certain part of the console.
-        /// </summary> 
-        /// <param name="s">What to write.</param>
-        /// <param name="x">X pos of the console.</param>
-        /// <param name="y">Y pos of the console.</param>
-        public void WriteIn(string s, int x, int y)
-        {
-            int oRow = Console.CursorTop;
-            int oCol = Console.CursorLeft;
-
-            Console.SetCursorPosition(y, x);
-            Console.Write(s);
-            Console.SetCursorPosition(oCol, oRow);
+            this.WriteIn(" ------------- ", 12, 17);
+            this.WriteIn(" ------------- ", 12, 1);
         }
     }
 }
