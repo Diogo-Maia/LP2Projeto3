@@ -1,0 +1,387 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ConsoleApp</name>
+    </assembly>
+    <members>
+        <member name="T:Common.Files.Directions">
+            <summary>
+            Enumeration containing the directions a piece can move.
+            </summary>
+        </member>
+        <member name="F:Common.Files.Directions.N">
+            <summary>
+            North.
+            </summary>
+        </member>
+        <member name="F:Common.Files.Directions.S">
+            <summary>
+            South.
+            </summary>
+        </member>
+        <member name="F:Common.Files.Directions.E">
+            <summary>
+            East.
+            </summary>
+        </member>
+        <member name="F:Common.Files.Directions.O">
+            <summary>
+            West.
+            </summary>
+        </member>
+        <member name="F:Common.Files.Directions.NE">
+            <summary>
+            NorthEast.
+            </summary>
+        </member>
+        <member name="F:Common.Files.Directions.NO">
+            <summary>
+            NorthWest.
+            </summary>
+        </member>
+        <member name="F:Common.Files.Directions.SE">
+            <summary>
+            SouthEast.
+            </summary>
+        </member>
+        <member name="F:Common.Files.Directions.SO">
+            <summary>
+            SouthWest.
+            </summary>
+        </member>
+        <member name="T:Common.Files.GameManager">
+            <summary>
+            Class Gamanager.
+            </summary>
+        </member>
+        <member name="F:Common.Files.GameManager.gameGrid">
+            <summary>
+            Represents the game board.
+            </summary>
+        </member>
+        <member name="F:Common.Files.GameManager.p1">
+            <summary>
+            Represents player 1.
+            </summary>
+        </member>
+        <member name="F:Common.Files.GameManager.p2">
+            <summary>
+            Represents player 2.
+            </summary>
+        </member>
+        <member name="F:Common.Files.GameManager.turn">
+            <summary>
+            Represents the current player playing.
+            </summary>
+        </member>
+        <member name="F:Common.Files.GameManager.cPiece">
+            <summary>
+            Represents current Piece.
+            </summary>
+        </member>
+        <member name="M:Common.Files.GameManager.#ctor(Common.Files.IInputController,Common.Files.IView)">
+            <summary>
+            Constructor of the class.
+            </summary>
+            <param name="input"></param>
+            <param name="view"></param>
+        </member>
+        <member name="M:Common.Files.GameManager.GameLoop">
+            <summary>
+            Game loop method.
+            </summary>
+        </member>
+        <member name="M:Common.Files.GameManager.MoveDirection">
+            <summary>
+            Chooses the direction to where the piece should go and move.
+            </summary>
+        </member>
+        <member name="M:Common.Files.GameManager.CheckMovement(System.String)">
+            <summary>
+            Method used to see if the piece can move in x direction.
+            </summary>
+            <param name="c">Choice of the player.</param>
+            <returns>Values used to move the piece.</returns>
+        </member>
+        <member name="M:Common.Files.GameManager.ChoosePiece">
+            <summary>
+            Method used for the player to choose a piece.
+            </summary>
+        </member>
+        <member name="M:Common.Files.GameManager.ChoosenPiece(System.String)">
+            <summary>
+            Gets the piece.
+            </summary>
+            <param name="x">choice of the player.</param>
+            <returns>Piece the player chooses.</returns>
+        </member>
+        <member name="M:Common.Files.GameManager.ChangeTurn">
+            <summary>
+            Changes the current player playing.
+            </summary>
+        </member>
+        <member name="M:Common.Files.GameManager.UpdatePieces">
+            <summary>
+            Updates the number of pieces each player has.
+            </summary>
+        </member>
+        <member name="M:Common.Files.GameManager.UpdateBlockedPieces">
+            <summary>
+            Updates the blocked pieces of the game.
+            </summary>
+        </member>
+        <member name="M:Common.Files.GameManager.CheckPos(Common.Files.Piece,Common.Files.Directions)">
+            <summary>
+            Checks if a piece can move in a direction.
+            </summary>
+            <param name="piece">Piece to move.</param>
+            <param name="dir">Direction to move.</param>
+            <returns>True if piece can be moved in that direction.</returns>
+        </member>
+        <member name="M:Common.Files.GameManager.SpawnPieces">
+            <summary>
+            Populates the board with pieces.
+            </summary>
+        </member>
+        <member name="M:Common.Files.GameManager.GetPlayers">
+            <summary>
+            Gets the menu to let the players pick the color.
+            </summary>
+        </member>
+        <member name="M:Common.Files.GameManager.SetPlayers(System.String)">
+            <summary>
+            Sets the players with the respective colors.
+            </summary>
+            <param name="choice">Color of the player.</param>
+        </member>
+        <member name="M:Common.Files.GameManager.PossibleMoves">
+            <summary>
+            Makes the possible moves from each board position.
+            </summary>
+        </member>
+        <member name="M:Common.Files.GameManager.Win">
+            <summary>
+            Sees if a player has win.
+            </summary>
+            <returns>True if a player won.</returns>
+        </member>
+        <member name="M:Common.Files.GameManager.HasAllPiecesBlocked(Common.Files.PieceColor)">
+            <summary>
+            Checks if a player has all his pieces blocked.
+            </summary>
+            <param name="color">Color of the player.</param>
+            <returns>True if all pieces are blocked.</returns>
+        </member>
+        <member name="T:Common.Files.Piece">
+            <summary>
+            Class that represents a game piece.
+            </summary>
+        </member>
+        <member name="P:Common.Files.Piece.Col">
+            <summary>
+            Gets or sets column where the piece is in.
+            </summary>
+        </member>
+        <member name="P:Common.Files.Piece.Row">
+            <summary>
+            Gets or Sets the row where the piece is in.
+            </summary>
+        </member>
+        <member name="P:Common.Files.Piece.PreviousCol">
+            <summary>
+            Gets or sets the previous Column.
+            </summary>
+        </member>
+        <member name="P:Common.Files.Piece.PreviousRow">
+            <summary>
+            Gets or sets the previous row.
+            </summary>
+        </member>
+        <member name="P:Common.Files.Piece.Id">
+            <summary>
+            Gets the Id.
+            </summary>
+        </member>
+        <member name="P:Common.Files.Piece.Color">
+            <summary>
+            Gets the volor of the piece.
+            </summary>
+        </member>
+        <member name="P:Common.Files.Piece.IsBlocked">
+            <summary>
+            Gets or sets a value indicating whether the piece
+            is blocked or not.
+            </summary>
+        </member>
+        <member name="M:Common.Files.Piece.#ctor(System.Int32,System.Int32,System.Int32,Common.Files.PieceColor)">
+            <summary>
+            Constructor of the class.
+            </summary>
+            <param name="row">Row of the Piece.</param>
+            <param name="col">Collumn of the piece.</param>
+            <param name="id">ID of the piece.</param>
+            <param name="color">Color of the piece.</param>
+        </member>
+        <member name="M:Common.Files.Piece.MoveTo(Common.Files.Directions)">
+            <summary>
+            Method to move the piece.
+            </summary>
+            <param name="dir">Direction to move.</param>
+        </member>
+        <member name="M:Common.Files.Piece.ResetMovement">
+            <summary>
+            Method to reset the movment of the piece.
+            </summary>
+        </member>
+        <member name="T:Common.Files.PieceColor">
+            <summary>
+            Enumeration that contains the color of the piece.
+            </summary>
+        </member>
+        <member name="F:Common.Files.PieceColor.W">
+            <summary>
+            White.
+            </summary>
+        </member>
+        <member name="F:Common.Files.PieceColor.B">
+            <summary>
+            Black.
+            </summary>
+        </member>
+        <member name="T:Common.Files.Playable">
+            <summary>
+            Enum to see if the piece is playable or not.
+            </summary>
+        </member>
+        <member name="F:Common.Files.Playable.Playable">
+            <summary>
+            Piece is playable.
+            </summary>
+        </member>
+        <member name="F:Common.Files.Playable.NonPlayable">
+            <summary>
+            Piece is non playable.
+            </summary>
+        </member>
+        <member name="T:Common.Files.Player">
+            <summary>
+            Class tha contains a player.
+            </summary>
+        </member>
+        <member name="P:Common.Files.Player.Color">
+            <summary>
+            Gets the color of the player.
+            </summary>
+        </member>
+        <member name="P:Common.Files.Player.Id">
+            <summary>
+            Gets the ID of the player.
+            </summary>
+        </member>
+        <member name="P:Common.Files.Player.PieceCount">
+            <summary>
+            Gets or sets the number of pieces the player has.
+            </summary>
+        </member>
+        <member name="M:Common.Files.Player.#ctor(Common.Files.PieceColor,System.Int32)">
+            <summary>
+            Constructor of the class player.
+            </summary>
+            <param name="color">Color of the player.</param>
+            <param name="id">ID of the player.</param>
+        </member>
+        <member name="T:Common.Files.Square">
+            <summary>
+            Class Square.
+            </summary>
+        </member>
+        <member name="P:Common.Files.Square.PossibleMovements">
+            <summary>
+            Gets or sets the possible movments the player can do.
+            </summary>
+        </member>
+        <member name="P:Common.Files.Square.Type">
+            <summary>
+            Gets the type.
+            </summary>
+        </member>
+        <member name="P:Common.Files.Square.Piece">
+            <summary>
+            Gets or sets a piece.
+            </summary>
+        </member>
+        <member name="M:Common.Files.Square.#ctor(Common.Files.Playable)">
+            <summary>
+            Constructor of the class Square.
+            </summary>
+            <param name="type">To see if its playable or not.</param>
+        </member>
+        <member name="M:Common.Files.Square.HasPiece">
+            <summary>
+            Sees if it has a piece.
+            </summary>
+            <returns>True if theres piece.</returns>
+        </member>
+        <member name="M:Common.Files.Square.HasDirection(Common.Files.Directions)">
+            <summary>
+            Sees if a direction is available.
+            </summary>
+            <param name="dir">direction to check.</param>
+            <returns>True if direction is available.</returns>
+        </member>
+        <member name="M:ConsoleApp.ConsoleView.MainMenu">
+            <summary>
+            Shows the main menu of the game.
+            </summary>
+        </member>
+        <member name="M:ConsoleApp.ConsoleView.ChooseMenu">
+            <summary>
+            Menu where the player chooses their color.
+            </summary>
+        </member>
+        <member name="M:ConsoleApp.ConsoleView.GetChar(Common.Files.Square)">
+            <summary>
+            Draws the playable pieces.
+            </summary>
+            <param name="square">A position on the board.</param>
+            <returns>Char to write.</returns>
+        </member>
+        <member name="M:ConsoleApp.ConsoleView.Render(Common.Files.Square[0:,0:])">
+            <summary>
+            Renders the game board.
+            </summary>
+            <param name="gameGrid">Game board.</param>
+        </member>
+        <member name="M:ConsoleApp.ConsoleView.DrawMov">
+            <summary>
+            Draws the respective directions and numbers to use them.
+            </summary>
+        </member>
+        <member name="M:ConsoleApp.ConsoleView.DrawBoard">
+            <summary>
+            Draws the lines of the board.
+            </summary>
+        </member>
+        <member name="M:ConsoleApp.ConsoleView.Win(Common.Files.Player)">
+            <summary>
+            Writes the winner of he game.
+            </summary>
+            <param name="winner">winner of the game.</param>
+        </member>
+        <member name="M:ConsoleApp.ConsoleView.ShowPossibleDirections(Common.Files.Directions[],Common.Files.Piece)">
+            <summary>
+            Show the direction of where a piece can be moved.
+            </summary>
+            <param name="possibleMoves">Possible moves.</param>
+            <param name="p">Piece to check the possible directions.</param>
+        </member>
+        <member name="M:ConsoleApp.ConsoleView.WriteIn(System.String,System.Int32,System.Int32)">
+            <summary>
+            Writes in a certain part of the console.
+            </summary> 
+            <param name="s">What to write.</param>
+            <param name="x">X pos of the console.</param>
+            <param name="y">Y pos of the console.</param>
+        </member>
+    </members>
+</doc>
