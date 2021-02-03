@@ -59,6 +59,16 @@
             Represents the game board.
             </summary>
         </member>
+        <member name="F:Common.Files.GameManager.input">
+            <summary>
+            Iterface for input.
+            </summary>
+        </member>
+        <member name="F:Common.Files.GameManager.view">
+            <summary>
+            Interface for Ui.
+            </summary>
+        </member>
         <member name="F:Common.Files.GameManager.p1">
             <summary>
             Represents player 1.
@@ -81,6 +91,7 @@
         </member>
         <member name="M:Common.Files.GameManager.#ctor(Common.Files.IInputController,Common.Files.IView)">
             <summary>
+            Initializes a new instance of the <see cref="T:Common.Files.GameManager"/> class.
             Constructor of the class.
             </summary>
             <param name="input"></param>
@@ -172,6 +183,63 @@
             <param name="color">Color of the player.</param>
             <returns>True if all pieces are blocked.</returns>
         </member>
+        <member name="T:Common.Files.IInputController">
+            <summary>
+            Interface to control the input.
+            </summary>
+        </member>
+        <member name="M:Common.Files.IInputController.GetsPiece">
+            <summary>
+            Gets the piece.
+            </summary>
+            <returns>input.</returns>
+        </member>
+        <member name="M:Common.Files.IInputController.GetsDirection">
+            <summary>
+            Gets the direction.
+            </summary>
+            <returns>input.</returns>
+        </member>
+        <member name="M:Common.Files.IInputController.GetsPlayer">
+            <summary>
+            Gets the player.
+            </summary>
+            <returns>Input.</returns>
+        </member>
+        <member name="T:Common.Files.IView">
+            <summary>
+            Interface to control the view
+            </summary>
+        </member>
+        <member name="M:Common.Files.IView.MainMenu">
+            <summary>
+            Main Menu display.
+            </summary>
+        </member>
+        <member name="M:Common.Files.IView.ChooseMenu">
+            <summary>
+            ChooseMenu UI.
+            </summary>
+        </member>
+        <member name="M:Common.Files.IView.Render(Common.Files.Square[0:,0:])">
+            <summary>
+            Renders the map.
+            </summary>
+            <param name="gameGrid">The game board.</param>
+        </member>
+        <member name="M:Common.Files.IView.Win(Common.Files.Player)">
+            <summary>
+            Tells who wins.
+            </summary>
+            <param name="winner">The winner.</param>
+        </member>
+        <member name="M:Common.Files.IView.ShowPossibleDirections(Common.Files.Directions[],Common.Files.Piece)">
+            <summary>
+            Show Directions.
+            </summary>
+            <param name="possibleMoves">All possible moves.</param>
+            <param name="p">A piece.</param>
+        </member>
         <member name="T:Common.Files.Piece">
             <summary>
             Class that represents a game piece.
@@ -215,6 +283,7 @@
         </member>
         <member name="M:Common.Files.Piece.#ctor(System.Int32,System.Int32,System.Int32,Common.Files.PieceColor)">
             <summary>
+            Initializes a new instance of the <see cref="T:Common.Files.Piece"/> class.
             Constructor of the class.
             </summary>
             <param name="row">Row of the Piece.</param>
@@ -285,6 +354,7 @@
         </member>
         <member name="M:Common.Files.Player.#ctor(Common.Files.PieceColor,System.Int32)">
             <summary>
+            Initializes a new instance of the <see cref="T:Common.Files.Player"/> class.
             Constructor of the class player.
             </summary>
             <param name="color">Color of the player.</param>
@@ -312,6 +382,7 @@
         </member>
         <member name="M:Common.Files.Square.#ctor(Common.Files.Playable)">
             <summary>
+            Initializes a new instance of the <see cref="T:Common.Files.Square"/> class.
             Constructor of the class Square.
             </summary>
             <param name="type">To see if its playable or not.</param>
