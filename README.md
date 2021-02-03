@@ -56,10 +56,10 @@ então criamos uma tread nova para conseguir pôr o código a correr enquanto ag
 
 O UML deste projeto é o seguinte:
 
-![UML](uml.svg);
+![UML](uml.svg)
 ## Referências
 
-A [API do C#](https://docs.microsoft.com/en-us/dotnet/csharp/);
+A [API do C#](https://docs.microsoft.com/en-us/dotnet/csharp/).
 
 A maioria do código no ramo comum é o mesmo que o Diogo Maia e o André Pedro
 fizeram para o segundo projeto desta cadeira, tendo sido adaptado às necessidades deste projeto.
