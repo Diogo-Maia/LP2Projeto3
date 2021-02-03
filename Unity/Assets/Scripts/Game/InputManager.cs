@@ -17,9 +17,6 @@ namespace Game
         private InputField getPlayer;
 
         [SerializeField]
-        private Text text;
-
-        [SerializeField]
         private View view;
 
         private bool x;

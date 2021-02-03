@@ -18,7 +18,6 @@ namespace Game
 
             gm = new GameManager(input, iv);
 
-            iv.MainMenu();
             Thread game = new Thread(new ThreadStart(gm.GameLoop));
             game.Start();
         }

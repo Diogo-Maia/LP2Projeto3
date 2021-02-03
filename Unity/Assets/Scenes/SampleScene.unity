@@ -2492,7 +2492,6 @@ MonoBehaviour:
   getPiece: {fileID: 867668320}
   getDirection: {fileID: 867668320}
   getPlayer: {fileID: 867668320}
-  text: {fileID: 330481634}
   view: {fileID: 1386123724}
 --- !u!4 &1386123723
 Transform:

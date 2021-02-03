@@ -19,7 +19,7 @@ namespace Game
 
         public void ChooseMenu()
         {
-            text = "Choose the color W or B";
+            text = "Choose who plays first Bottom(W) or Top(B)";
         }
 
         public void MainMenu()
@@ -106,7 +106,16 @@ namespace Game
 
         public void ShowPossibleDirections(Directions[] possibleMoves, Piece p)
         {
+            text = "";
+            text += "Possible movements:\n";
+            foreach (Directions direction in possibleMoves)
+            {
+                text += direction + ", ";
+            }
 
+            text += "\n";
+            text += $"Selected Piece: {p.Id}";
+            text += "Choose one of the options";
         }
 
         public void Win(Player winner)
