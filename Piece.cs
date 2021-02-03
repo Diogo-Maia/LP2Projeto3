@@ -42,6 +42,7 @@
         public bool IsBlocked { get; set; }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Piece"/> class.
         /// Constructor of the class.
         /// </summary>
         /// <param name="row">Row of the Piece.</param>
@@ -50,10 +51,10 @@
         /// <param name="color">Color of the piece.</param>
         public Piece(int row, int col, int id, PieceColor color)
         {
-            Row = row;
-            Col = col;
-            Id = id;
-            Color = color;
+            this.Row = row;
+            this.Col = col;
+            this.Id = id;
+            this.Color = color;
         }
 
         /// <summary>
@@ -62,51 +63,61 @@
         /// <param name="dir">Direction to move.</param>
         public void MoveTo(Directions dir)
         {
-            PreviousCol = Col;
-            PreviousRow = Row;
+            this.PreviousCol = this.Col;
+            this.PreviousRow = this.Row;
 
             switch (dir)
             {
                 case Directions.NE:
-                    Col++;
-                    Row--;
+                    this.Col++;
+                    this.Row--;
                     break;
 
                 case Directions.N:
-                    Row--;
+                    this.Row--;
                     break;
 
                 case Directions.NO:
-                    Col--;
-                    Row--;
+                    this.Col--;
+                    this.Row--;
                     break;
 
                 case Directions.E:
-                    if (Row == 0 || Row == 4)
-                        Col += 2;
+                    if (this.Row == 0 || this.Row == 4)
+                    {
+                        this.Col += 2;
+                    }
                     else
-                        Col++;
+                    {
+                        this.Col++;
+                    }
+
                     break;
 
                 case Directions.O:
-                    if (Row == 0 || Row == 4)
-                        Col -= 2;
+                    if (this.Row == 0 || this.Row == 4)
+                    {
+                        this.Col -= 2;
+                    }
                     else
-                        Col--;
+                    {
+                        this.Col--;
+                    }
+
                     break;
 
                 case Directions.SE:
-                    Col++;
-                    Row++;
+                    this.Col++;
+                    this.Row++;
                     break;
 
                 case Directions.S:
-                    Row++;
+                    this.Row++;
                     break;
 
                 case Directions.SO:
-                    Col--;
-                    Row++;
+                    this.Col--;
+                    this.Row++;
                     break;
             }
         }
@@ -116,8 +127,8 @@
         /// </summary>
         public void ResetMovement()
         {
-            Row = PreviousRow;
-            Col = PreviousCol;
+            this.Row = this.PreviousRow;
+            this.Col = this.PreviousCol;
         }
     }
 }

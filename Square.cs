@@ -21,16 +21,17 @@
         public Piece Piece { get; set; }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Square"/> class.
         /// Constructor of the class Square.
         /// </summary>
         /// <param name="type">To see if its playable or not.</param>
-        public Square(Playable type) => Type = type;
+        public Square(Playable type) => this.Type = type;
 
         /// <summary>
         /// Sees if it has a piece.
         /// </summary>
         /// <returns>True if theres piece.</returns>
-        public bool HasPiece() => !(Piece is null);
+        public bool HasPiece() => !(this.Piece is null);
 
         /// <summary>
         /// Sees if a direction is available.
@@ -39,7 +40,7 @@
         /// <returns>True if direction is available.</returns>
         public bool HasDirection(Directions dir)
         {
-            foreach (Directions direction in PossibleMovements)
+            foreach (Directions direction in this.PossibleMovements)
             {
                 if (direction == dir)
                 {

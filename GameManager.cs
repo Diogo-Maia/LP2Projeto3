@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Common.Files
+﻿namespace Common.Files
 {
+    using System;
+
     /// <summary>
     /// Class Gamanager.
     /// </summary>
@@ -12,9 +12,15 @@ namespace Common.Files
         /// </summary>
         public readonly Square[,] gameGrid;
 
-        private IInputController input;
+        /// <summary>
+        /// Iterface for input.
+        /// </summary>
+        private readonly IInputController input;
 
-        private IView view;
+        /// <summary>
+        /// Interface for Ui.
+        /// </summary>
+        private readonly IView view;
 
         /// <summary>
         /// Represents player 1.
@@ -37,6 +43,7 @@ namespace Common.Files
         private Piece cPiece;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="GameManager"/> class.
         /// Constructor of the class.
         /// </summary>
         /// <param name="input"></param>
@@ -48,13 +55,13 @@ namespace Common.Files
             this.view = view;
 
             // Instanciates the grid
-            gameGrid = new Square[5, 5];
+            this.gameGrid = new Square[5, 5];
 
             // Spawns the pieces
-            SpawnPieces();
+            this.SpawnPieces();
 
             // Sets all possible movements
-            PossibleMoves();
+            this.PossibleMoves();
         }
 
         /// <summary>
@@ -63,37 +70,37 @@ namespace Common.Files
         public void GameLoop()
         {
             // Get the players and respective colors
-            GetPlayers();
+            this.GetPlayers();
 
             // Make player 1 play
-            turn = p1;
+            this.turn = this.p1;
 
             // Update the Blocked Pieces
-            UpdateBlockedPieces();
+            this.UpdateBlockedPieces();
 
             // Play a turn
             while (true)
             {
                 // Player chooses a piece to play
-                ChoosePiece();
+                this.ChoosePiece();
 
                 // Chooses the direction to move the piece and moves the piece
-                MoveDirection();
+                this.MoveDirection();
 
                 // If a player wins, clear the board and show the winner.
-                if (Win())
+                if (this.Win())
                 {
                     // Clears the console
                     Console.Clear();
 
-                    view.Win(turn);
+                    this.view.Win(this.turn);
 
                     // Breaks the game loop
                     break;
                 }
 
                 // Changes the player who is playing
-                ChangeTurn();
+                this.ChangeTurn();
             }
         }
 
@@ -114,17 +121,19 @@ namespace Common.Files
                 while (c != "0" && c != "1" && c != "2" && c != "3" && c != "4"
                     && c != "5" && c != "6" && c != "7")
                 {
-                    view.Render(gameGrid);
+                    this.view.Render(this.gameGrid);
 
-                    view.ShowPossibleDirections(
-                        gameGrid[cPiece.Row, cPiece.Col].PossibleMovements,
-                        cPiece);
+                    this.view.ShowPossibleDirections(
+                        this.gameGrid[
+                            this.cPiece.Row,
+                            this.cPiece.Col].PossibleMovements,
+                        this.cPiece);
 
                     // Gets the player choice
-                    c = input.GetsDirection();
+                    c = this.input.GetsDirection();
 
                     // Checks if piece can be moved in that direction
-                    mov = CheckMovement(c);
+                    mov = this.CheckMovement(c);
 
                     // If an unavaliable movement is chosen
                     // display an appropriate message
@@ -141,26 +150,28 @@ namespace Common.Files
             if (mov.Item4)
             {
                 // Moves the piece
-                cPiece.MoveTo((Directions)Convert.ToInt32(c));
+                this.cPiece.MoveTo((Directions)Convert.ToInt32(c));
 
                 // Makes the place where the piece was null
-                gameGrid[cPiece.Row, cPiece.Col].Piece = null;
+                this.gameGrid[this.cPiece.Row, this.cPiece.Col].Piece = null;
 
                 // Resets the movement
-                cPiece.ResetMovement();
+                this.cPiece.ResetMovement();
 
                 // Updates the number of pieces each player has
-                UpdatePieces();
+                this.UpdatePieces();
             }
 
-            cPiece.Row = mov.Item2;
-            cPiece.Col = mov.Item3;
+            this.cPiece.Col = mov.Item3;
+            this.cPiece.Row = mov.Item2;
 
-            gameGrid[cPiece.Row, cPiece.Col].Piece = cPiece;
-            gameGrid[cPiece.PreviousRow, cPiece.PreviousCol].Piece = null;
+            this.gameGrid[this.cPiece.Row, this.cPiece.Col]
+                .Piece = this.cPiece;
+            this.gameGrid[this.cPiece.PreviousRow, this.cPiece.PreviousCol]
+                .Piece = null;
 
             // Updates the blocked pieces
-            UpdateBlockedPieces();
+            this.UpdateBlockedPieces();
         }
 
         /// <summary>
@@ -189,15 +200,17 @@ namespace Common.Files
                 // Gets the direction the player wanted
                 Directions dir = (Directions)Convert.ToInt32(c);
 
-                if (gameGrid[cPiece.Row, cPiece.Col].HasDirection(dir))
+                if (this.gameGrid[this.cPiece.Row, this.cPiece.Col]
+                    .HasDirection(dir))
                 {
-                    cPiece.MoveTo(dir);
+                    this.cPiece.MoveTo(dir);
 
-                    Square targetSq = gameGrid[cPiece.Row, cPiece.Col];
-                    pRow = cPiece.PreviousRow;
-                    pColumn = cPiece.PreviousCol;
-                    nRow = cPiece.Row;
-                    nColumn = cPiece.Col;
+                    Square targetSq = this.gameGrid
+                        [this.cPiece.Row, this.cPiece.Col];
+                    pRow = this.cPiece.PreviousRow;
+                    pColumn = this.cPiece.PreviousCol;
+                    nRow = this.cPiece.Row;
+                    nColumn = this.cPiece.Col;
 
                     if (!targetSq.HasPiece())
                     {
@@ -205,23 +218,24 @@ namespace Common.Files
                     }
                     else
                     {
-                        if (cPiece.Color != targetSq.Piece.Color &&
+                        if (this.cPiece.Color != targetSq.Piece.Color &&
                             targetSq.HasDirection(dir))
                         {
-                            cPiece.MoveTo(dir);
-                            nRow = cPiece.Row;
-                            nColumn = cPiece.Col;
+                            this.cPiece.MoveTo(dir);
+                            nRow = this.cPiece.Row;
+                            nColumn = this.cPiece.Col;
                             eraseEnemy = true;
 
                             value =
-                                !gameGrid[cPiece.Row, cPiece.Col].HasPiece();
+                                !this.gameGrid
+                                [this.cPiece.Row, this.cPiece.Col].HasPiece();
                         }
                     }
 
-                    cPiece.Row = pRow;
-                    cPiece.Col = pColumn;
-                    cPiece.PreviousRow = pRow;
-                    cPiece.PreviousCol = pColumn;
+                    this.cPiece.Row = pRow;
+                    this.cPiece.Col = pColumn;
+                    this.cPiece.PreviousRow = pRow;
+                    this.cPiece.PreviousCol = pColumn;
                 }
 
                 return (value, nRow, nColumn, eraseEnemy);
@@ -235,7 +249,7 @@ namespace Common.Files
         {
             string c = string.Empty;
 
-            cPiece = null;
+            this.cPiece = null;
 
             // Ask the player which piece they wish to choose.
             while (cPiece is null)
@@ -244,19 +258,20 @@ namespace Common.Files
                     c != "4" && c != "5" && c != "6")
                 {
                     Console.Clear();
-                    view.Render(gameGrid);
-                    Console.WriteLine($"{turn.Id} - {turn.Color} is playing.");
+                    this.view.Render(this.gameGrid);
+                    Console.WriteLine($"{this.turn.Id} - {this.turn.Color}" +
+                        $" is playing.");
                     Console.WriteLine("Choose the piece you want" +
                         " to play from 1-6.");
                     Console.WriteLine();
-                    c = input.GetsPiece();
+                    c = this.input.GetsPiece();
                 }
 
-                cPiece = ChoosenPiece(c);
+                this.cPiece = this.ChoosenPiece(c);
 
                 // If the chosen piece isn't allowed to be chosen, display 
                 // an appropriate message.
-                if (cPiece is null)
+                if (this.cPiece is null)
                 {
                     Console.WriteLine("Unavailable Piece to choose");
                 }
@@ -273,10 +288,10 @@ namespace Common.Files
             Piece piece = null;
 
             // Gets the piece (with color and ID) the player chooses.
-            foreach (Square square in gameGrid)
+            foreach (Square square in this.gameGrid)
             {
                 if (square.HasPiece() && square.Piece.Id == Convert.ToInt32(x)
-                    && square.Piece.Color == turn.Color
+                    && square.Piece.Color == this.turn.Color
                     && !square.Piece.IsBlocked)
                 {
                     piece = square.Piece;
@@ -289,20 +304,21 @@ namespace Common.Files
         /// <summary>
         /// Changes the current player playing.
         /// </summary>
-        private void ChangeTurn() => turn = turn == p1 ? p2 : p1;
+        private void ChangeTurn() => this.turn = this.turn ==
+            this.p1 ? this.p2 : this.p1;
 
         /// <summary>
         /// Updates the number of pieces each player has.
         /// </summary>
         private void UpdatePieces()
         {
-            if (turn == p1)
+            if (this.turn == this.p1)
             {
-                p2.PieceCount--;
+                this.p2.PieceCount--;
             }
             else
             {
-                p1.PieceCount--;
+                this.p1.PieceCount--;
             }
         }
 
@@ -311,24 +327,27 @@ namespace Common.Files
         /// </summary>
         private void UpdateBlockedPieces()
         {
-            for (int x = 0; x < gameGrid.GetLength(0); x++)
+            for (int x = 0; x < this.gameGrid.GetLength(0); x++)
             {
-                for (int y = 0; y < gameGrid.GetLength(1); y++)
+                for (int y = 0; y < this.gameGrid.GetLength(1); y++)
                 {
-                    if (gameGrid[x, y].HasPiece())
+                    if (this.gameGrid[x, y].HasPiece())
                     {
                         bool value = false;
 
                         foreach (Directions d in
-                            gameGrid[x, y].PossibleMovements)
+                            this.gameGrid[x, y].PossibleMovements)
                         {
-                            value = CheckPos(gameGrid[x, y].Piece, d);
+                            value = 
+                                this.CheckPos(this.gameGrid[x, y].Piece, d);
 
                             if (!value)
+                            {
                                 break;
+                            }
                         }
 
-                        gameGrid[x, y].Piece.IsBlocked = value;
+                        this.gameGrid[x, y].Piece.IsBlocked = value;
                     }
                 }
             }
@@ -352,15 +371,17 @@ namespace Common.Files
 
             // Check if a position on the grid doesn't have another piece and
             // is able to be moved there.
-            if (gameGrid[piece.Row, piece.Col].HasPiece())
+            if (this.gameGrid[piece.Row, piece.Col].HasPiece())
             {
-                if (gameGrid[piece.Row, piece.Col].Piece.Color != piece.Color)
+                if (this.gameGrid[piece.Row, piece.Col].Piece.Color != piece.Color)
                 {
-                    if (gameGrid[piece.Row, piece.Col].HasDirection(dir))
+                    if (this.gameGrid[piece.Row, piece.Col].HasDirection(dir))
                     {
                         piece.MoveTo(dir);
-                        if (gameGrid[piece.Row, piece.Col].HasPiece())
+                        if (this.gameGrid[piece.Row, piece.Col].HasPiece())
+                        {
                             value = true;
+                        }
                     }
                 }
                 else
@@ -383,43 +404,43 @@ namespace Common.Files
         private void SpawnPieces()
         {
             // Draw the grid
-            for (int i = 0; i < gameGrid.GetLength(0); ++i)
+            for (int i = 0; i < this.gameGrid.GetLength(0); ++i)
             {
-                for (int j = 0; j < gameGrid.GetLength(1); j++)
+                for (int j = 0; j < this.gameGrid.GetLength(1); j++)
                 {
-                    gameGrid[i, j] = new Square(Playable.Playable);
+                    this.gameGrid[i, j] = new Square(Playable.Playable);
                 }
             }
 
             // Spawn each piece with its specific color and position
             // on the grid
-            gameGrid[0, 0].Piece = new Piece(0, 0, 1, PieceColor.B);
-            gameGrid[0, 2].Piece = new Piece(0, 2, 2, PieceColor.B);
-            gameGrid[0, 4].Piece = new Piece(0, 4, 3, PieceColor.B);
-            gameGrid[1, 1].Piece = new Piece(1, 1, 4, PieceColor.B);
-            gameGrid[1, 2].Piece = new Piece(1, 2, 5, PieceColor.B);
-            gameGrid[1, 3].Piece = new Piece(1, 3, 6, PieceColor.B);
-            gameGrid[3, 1].Piece = new Piece(3, 1, 4, PieceColor.W);
-            gameGrid[3, 2].Piece = new Piece(3, 2, 5, PieceColor.W);
-            gameGrid[3, 3].Piece = new Piece(3, 3, 6, PieceColor.W);
-            gameGrid[4, 0].Piece = new Piece(4, 0, 1, PieceColor.W);
-            gameGrid[4, 2].Piece = new Piece(4, 2, 2, PieceColor.W);
-            gameGrid[4, 4].Piece = new Piece(4, 4, 3, PieceColor.W);
+            this.gameGrid[0, 0].Piece = new Piece(0, 0, 1, PieceColor.B);
+            this.gameGrid[0, 2].Piece = new Piece(0, 2, 2, PieceColor.B);
+            this.gameGrid[0, 4].Piece = new Piece(0, 4, 3, PieceColor.B);
+            this.gameGrid[1, 1].Piece = new Piece(1, 1, 4, PieceColor.B);
+            this.gameGrid[1, 2].Piece = new Piece(1, 2, 5, PieceColor.B);
+            this.gameGrid[1, 3].Piece = new Piece(1, 3, 6, PieceColor.B);
+            this.gameGrid[3, 1].Piece = new Piece(3, 1, 4, PieceColor.W);
+            this.gameGrid[3, 2].Piece = new Piece(3, 2, 5, PieceColor.W);
+            this.gameGrid[3, 3].Piece = new Piece(3, 3, 6, PieceColor.W);
+            this.gameGrid[4, 0].Piece = new Piece(4, 0, 1, PieceColor.W);
+            this.gameGrid[4, 2].Piece = new Piece(4, 2, 2, PieceColor.W);
+            this.gameGrid[4, 4].Piece = new Piece(4, 4, 3, PieceColor.W);
 
             // Spawn each non-playable square on a specific position
             // on the grid
-            gameGrid[0, 1] = new Square(Playable.NonPlayable);
-            gameGrid[0, 3] = new Square(Playable.NonPlayable);
-            gameGrid[1, 0] = new Square(Playable.NonPlayable);
-            gameGrid[1, 4] = new Square(Playable.NonPlayable);
-            gameGrid[2, 0] = new Square(Playable.NonPlayable);
-            gameGrid[2, 1] = new Square(Playable.NonPlayable);
-            gameGrid[2, 3] = new Square(Playable.NonPlayable);
-            gameGrid[2, 4] = new Square(Playable.NonPlayable);
-            gameGrid[3, 0] = new Square(Playable.NonPlayable);
-            gameGrid[3, 4] = new Square(Playable.NonPlayable);
-            gameGrid[4, 1] = new Square(Playable.NonPlayable);
-            gameGrid[4, 3] = new Square(Playable.NonPlayable);
+            this.gameGrid[0, 1] = new Square(Playable.NonPlayable);
+            this.gameGrid[0, 3] = new Square(Playable.NonPlayable);
+            this.gameGrid[1, 0] = new Square(Playable.NonPlayable);
+            this.gameGrid[1, 4] = new Square(Playable.NonPlayable);
+            this.gameGrid[2, 0] = new Square(Playable.NonPlayable);
+            this.gameGrid[2, 1] = new Square(Playable.NonPlayable);
+            this.gameGrid[2, 3] = new Square(Playable.NonPlayable);
+            this.gameGrid[2, 4] = new Square(Playable.NonPlayable);
+            this.gameGrid[3, 0] = new Square(Playable.NonPlayable);
+            this.gameGrid[3, 4] = new Square(Playable.NonPlayable);
+            this.gameGrid[4, 1] = new Square(Playable.NonPlayable);
+            this.gameGrid[4, 3] = new Square(Playable.NonPlayable);
         }
 
         /// <summary>
@@ -434,11 +455,11 @@ namespace Common.Files
                 && !string.Equals(
                     choice, "B", StringComparison.OrdinalIgnoreCase))
             {
-                view.ChooseMenu();
-                choice = input.GetsPlayer().ToUpper();
+                this.view.ChooseMenu();
+                choice = this.input.GetsPlayer().ToUpper();
             }
 
-            SetPlayers(choice);
+            this.SetPlayers(choice);
         }
 
         /// <summary>
@@ -451,15 +472,15 @@ namespace Common.Files
             // opponent's color to black.
             if (string.Equals(choice, "W", StringComparison.OrdinalIgnoreCase))
             {
-                p1 = new Player(PieceColor.W, 1);
-                p2 = new Player(PieceColor.B, 2);
+                this.p1 = new Player(PieceColor.W, 1);
+                this.p2 = new Player(PieceColor.B, 2);
             }
             else
             {
                 // If the player chooses B, set its color to black
                 // and the opponent's color to white.
-                p1 = new Player(PieceColor.B, 1);
-                p2 = new Player(PieceColor.W, 2);
+                this.p1 = new Player(PieceColor.B, 1);
+                this.p2 = new Player(PieceColor.W, 2);
             }
         }
 
@@ -468,44 +489,44 @@ namespace Common.Files
         /// </summary>
         private void PossibleMoves()
         {
-            gameGrid[0, 0].PossibleMovements
+            this.gameGrid[0, 0].PossibleMovements
                     = new Directions[] {
                         Directions.E, Directions.SE, };
-            gameGrid[0, 2].PossibleMovements
+            this.gameGrid[0, 2].PossibleMovements
                 = new Directions[] {
                     Directions.S, Directions.E, Directions.O, };
-            gameGrid[0, 4].PossibleMovements
+            this.gameGrid[0, 4].PossibleMovements
                 = new Directions[] {
                     Directions.O, Directions.SO, };
-            gameGrid[1, 1].PossibleMovements
+            this.gameGrid[1, 1].PossibleMovements
                 = new Directions[] {
                     Directions.NO, Directions.E, Directions.SE, };
-            gameGrid[1, 2].PossibleMovements
+            this.gameGrid[1, 2].PossibleMovements
                 = new Directions[] {
                     Directions.N, Directions.S, Directions.E, Directions.O, };
-            gameGrid[1, 3].PossibleMovements
+            this.gameGrid[1, 3].PossibleMovements
                 = new Directions[] {
                     Directions.NE, Directions.O, Directions.SO, };
-            gameGrid[2, 2].PossibleMovements
+            this.gameGrid[2, 2].PossibleMovements
                 = new Directions[] {
                     Directions.NE, Directions.N, Directions.NO,
                     Directions.SO, Directions.S, Directions.SE, };
-            gameGrid[3, 1].PossibleMovements
+            this.gameGrid[3, 1].PossibleMovements
                 = new Directions[] {
                     Directions.NE, Directions.E, Directions.SO, };
-            gameGrid[3, 2].PossibleMovements
+            this.gameGrid[3, 2].PossibleMovements
                 = new Directions[] {
                     Directions.N, Directions.S, Directions.E, Directions.O, };
-            gameGrid[3, 3].PossibleMovements
+            this.gameGrid[3, 3].PossibleMovements
                 = new Directions[] {
                     Directions.NO, Directions.O, Directions.SE, };
-            gameGrid[4, 0].PossibleMovements
+            this.gameGrid[4, 0].PossibleMovements
                 = new Directions[] {
                     Directions.NE, Directions.E, };
-            gameGrid[4, 2].PossibleMovements
+            this.gameGrid[4, 2].PossibleMovements
                 = new Directions[] {
                     Directions.O, Directions.E, Directions.N, };
-            gameGrid[4, 4].PossibleMovements
+            this.gameGrid[4, 4].PossibleMovements
                 = new Directions[] {
                     Directions.O, Directions.NO, };
         }
@@ -518,16 +539,18 @@ namespace Common.Files
         {
             // If the other player has all their pieces blocked, they lose
             // and the current player wins.
-            if (p1.Color == turn.Color)
+            if (this.p1.Color == this.turn.Color)
             {
-                if (p2.PieceCount == 0 || HasAllPiecesBlocked(p2.Color))
+                if (this.p2.PieceCount == 0 ||
+                    this.HasAllPiecesBlocked(this.p2.Color))
                 {
                     return true;
                 }
             }
             else
             {
-                if (p1.PieceCount == 0 || HasAllPiecesBlocked(p1.Color))
+                if (this.p1.PieceCount == 0 ||
+                    this.HasAllPiecesBlocked(this.p1.Color))
                 {
                     return true;
                 }
@@ -547,7 +570,7 @@ namespace Common.Files
 
             // Check if the piece of the current player's color is
             // blocked by all sides
-            foreach (Square square in gameGrid)
+            foreach (Square square in this.gameGrid)
             {
                 if (square.HasPiece() && square.Piece.Color == color)
                 {
