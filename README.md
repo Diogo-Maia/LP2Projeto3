@@ -56,7 +56,7 @@ então criamos uma tread nova para conseguir pôr o código a correr enquanto ag
 
 O UML deste projeto é o seguinte:
 
-![UML](uml.svg)
+![UML](UML.svg)
 ## Referências
 
 A [API do C#](https://docs.microsoft.com/en-us/dotnet/csharp/).
