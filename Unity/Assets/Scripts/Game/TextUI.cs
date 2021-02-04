@@ -4,23 +4,32 @@ using UnityEngine.UI;
 
 namespace Game
 {
+    /// <summary>
+    /// Class TextUI.
+    /// </summary>
     public class TextUI : MonoBehaviour
     {
+        // View variable.
         [SerializeField]
         private View v;
 
+        // View variable.
         [SerializeField]
         private Text t;
 
+        // Variable for the gameboard.
         [SerializeField]
         private Text gameboard;
 
+        // Variable for directions.
         [SerializeField]
         private Text directions;
 
+        // Variable for the win menu.
         [SerializeField]
         private GameObject winMenu;
 
+        // Variable for the text menu.
         [SerializeField]
         private Text winText;
 
@@ -42,6 +51,9 @@ namespace Game
             
         }
 
+        /// <summary>
+        /// Return() method that goes back to the Menu.
+        /// </summary>
         public void Return()
         {
             SceneManager.LoadScene(0);

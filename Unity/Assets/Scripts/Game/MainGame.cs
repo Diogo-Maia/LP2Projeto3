@@ -4,13 +4,23 @@ using System.Threading;
 
 namespace Game
 {
+    /// <summary>
+    /// Class MainGame()
+    /// </summary>
     public class MainGame : MonoBehaviour
     {
+        // Variable input.
         private IInputController input;
+
+        // Variable view.
         private IView iv;
 
+        // Variable for the game manager.
         private GameManager gm;
 
+        /// <summary>
+        /// Method start.
+        /// </summary>
         private void Start()
         {
             input = GetComponent<InputManager>();

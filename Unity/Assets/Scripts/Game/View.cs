@@ -3,6 +3,9 @@ using Common.Files;
 
 namespace Game
 {
+    /// <summary>
+    /// Class view that implements IView
+    /// </summary>
     public class View : MonoBehaviour, IView
     {
         public string text;
@@ -12,6 +15,9 @@ namespace Game
         public bool win;
         public Player winner;
 
+        /// <summary>
+        /// Method Start()
+        /// </summary>
         private void Start()
         {
             text = "";
@@ -20,16 +26,26 @@ namespace Game
             win = false;
         }
 
+        /// <summary>
+        /// Method that chooses the menu
+        /// </summary>
         public void ChooseMenu()
         {
             text = "Choose who plays first Bottom(W) or Top(B)";
         }
 
+        /// <summary>
+        /// Method MainMenu()
+        /// </summary>
         public void MainMenu()
         {
             //Shown in different scene
         }
 
+        /// <summary>
+        /// Method that renders the game grid
+        /// </summary>
+        /// <param name="gameGrid"></param>
         public void Render(Square[,] gameGrid)
         {
             gameboard = "";
@@ -47,7 +63,9 @@ namespace Game
             DrawMov();
         }
 
-
+        /// <summary>
+        /// Method that prints the moviment text
+        /// </summary>
         private void DrawMov()
         {
             directions = "";
@@ -63,6 +81,11 @@ namespace Game
             directions += "  7(SO)   1(S)   6(SE)\n";
         }
 
+        /// <summary>
+        /// Method that gets a char
+        /// </summary>
+        /// <param name="square"></param>
+        /// <returns></returns>
         private char GetChar(Square square)
         {
             char c = ' ';
@@ -107,6 +130,11 @@ namespace Game
             return c;
         }
 
+        /// <summary>
+        /// Method that shows the possible movement directions
+        /// </summary>
+        /// <param name="possibleMoves"></param>
+        /// <param name="p"></param>
         public void ShowPossibleDirections(Directions[] possibleMoves, Piece p)
         {
             text = "";
@@ -121,6 +149,10 @@ namespace Game
             text += "Choose one of the options";
         }
 
+        /// <summary>
+        /// Method Win()
+        /// </summary>
+        /// <param name="winner"></param>
         public void Win(Player winner)
         {
             win = true;

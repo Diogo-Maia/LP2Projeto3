@@ -14,6 +14,8 @@
   * Interface IView
   * Finalizou projeto da consola
   * Fez maior parte do código do Unity
+  * Corrigiu warnings
+  * Comentários XML
 
 * Inês Gonçalves
   * Relatório
@@ -22,6 +24,8 @@
   * ConsoleControler
   * Começou a trabalhar no projeto da consola
   * Colocou o cógido no ramo common
+  * Doxygen
+  * Comentários XML
 
 ## Repositório
 
